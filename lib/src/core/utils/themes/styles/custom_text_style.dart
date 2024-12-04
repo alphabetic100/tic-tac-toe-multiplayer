@@ -12,11 +12,13 @@ class CustomTextStyle {
   static const TextStyle titleStyle = TextStyle(
     fontFamily: syneMono,
     fontSize: 20,
+    letterSpacing: 0.8,
     fontWeight: FontWeight.bold,
   );
   static const TextStyle regularStyle = TextStyle(
     fontFamily: syneMono,
     fontSize: 16,
-    color: MyColors.grayishBlue,
+    color: MyColors.slateBlue,
+    fontWeight: FontWeight.bold,
   );
 }

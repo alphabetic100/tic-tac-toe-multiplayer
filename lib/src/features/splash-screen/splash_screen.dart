@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/constants/animation_asset.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/splash-screen/controller/splash_screen_controller.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  final ScreenController screenController = Get.put(ScreenController());
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +35,10 @@ class SplashScreen extends StatelessWidget {
                 repeat: false,
                 fit: BoxFit.fill,
                 addRepaintBoundary: true,
+                onLoaded: (p0) {
+                  screenController.isLoaded.value = true;
+                  screenController.switchScreen(context);
+                },
                 backgroundLoading: true,
               ),
             ),

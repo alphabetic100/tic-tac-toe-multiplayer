@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe_multiplayer/src/features/splash-screen/splash_screen.dart';
+import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
+import 'package:tic_tac_toe_multiplayer/src/router/my_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,12 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    ScreenSize.init(context);
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      routerConfig: router,
     );
   }
 }
