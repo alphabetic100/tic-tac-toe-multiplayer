@@ -28,7 +28,6 @@ class ProfileDrawer extends StatelessWidget {
               "Md Nazmul Hasan",
               style: CustomTextStyle.titleStyle,
             ),
-            const HorizontalSpace(height: 10),
             const Text(
               "example@gmail.com",
               style: CustomTextStyle.regularStyle,

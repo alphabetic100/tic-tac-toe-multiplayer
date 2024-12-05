@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custome_size_box.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
@@ -17,6 +18,7 @@ class OptionsView extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
+                context.pushNamed("logIn");
                 //TODO: have to implement play offline page
               },
               child: Container(
@@ -26,17 +28,24 @@ class OptionsView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18),
                   boxShadow: const [
                     BoxShadow(
-                        color: MyColors.lightGrey,
-                        spreadRadius: 5,
-                        blurRadius: 3)
+                      color: MyColors.lightGrey,
+                      spreadRadius: 5,
+                      blurRadius: 3,
+                    )
                   ],
                   border: Border.all(color: MyColors.turquoise),
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: MyColors.white,
+                      color: MyColors.slateBlue,
                       borderRadius: BorderRadius.circular(18)),
-                  // child: Image.asset("assets/icons/offline.png"),
+                  child: Center(
+                    child: Icon(
+                      CupertinoIcons.wifi_slash,
+                      size: ScreenSize.height * 0.055,
+                      color: MyColors.lightGrey,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -52,6 +61,7 @@ class OptionsView extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
+                context.pushNamed("signUp");
                 //TODO: have to implement play offline page
               },
               child: Container(
@@ -69,9 +79,15 @@ class OptionsView extends StatelessWidget {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: MyColors.white,
+                      color: MyColors.slateBlue,
                       borderRadius: BorderRadius.circular(18)),
-                  // child: Image.asset("assets/icons/online-game.png"),
+                  child: Center(
+                    child: Icon(
+                      CupertinoIcons.wifi,
+                      size: ScreenSize.height * 0.055,
+                      color: MyColors.lightGrey,
+                    ),
+                  ),
                 ),
               ),
             ),

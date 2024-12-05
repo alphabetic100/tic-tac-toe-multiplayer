@@ -21,4 +21,10 @@ class CustomTextStyle {
     color: MyColors.slateBlue,
     fontWeight: FontWeight.bold,
   );
+  static const TextStyle buttonTextstyle = TextStyle(
+    fontFamily: syneMono,
+    fontSize: 18,
+    color: MyColors.white,
+    fontWeight: FontWeight.w100,
+  );
 }
