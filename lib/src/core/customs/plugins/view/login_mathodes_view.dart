@@ -19,7 +19,7 @@ class LoginMathodesView extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: MyColors.white,
             backgroundImage: const AssetImage(
-              "assets/icons/facebook_icon.png",
+              "assets/icons/google_icon.png",
             ),
             radius: ScreenSize.width * 0.07,
           ),
@@ -30,7 +30,7 @@ class LoginMathodesView extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: MyColors.white,
             backgroundImage: const AssetImage(
-              "assets/icons/google_icon.png",
+              "assets/icons/facebook_icon.png",
             ),
             radius: ScreenSize.width * 0.07,
           ),

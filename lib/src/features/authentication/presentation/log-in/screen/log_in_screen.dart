@@ -83,7 +83,7 @@ class LogInScreen extends StatelessWidget {
           ),
           BottomView(
             bottomViewtitle: "Don't have any account?",
-            navigationTitle: "Sign up",
+            navigationTitle: "create now!",
             ontap: () {
               context.pushNamed("signUp");
             },
