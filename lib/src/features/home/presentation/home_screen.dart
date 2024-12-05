@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/personal-deshboard/view/personal_dashboard.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custome_size_box.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
@@ -70,13 +71,10 @@ class HomeScreen extends StatelessWidget {
                     ),
                     HorizontalSpace(height: ScreenSize.height * 0.1),
                     Container(
-                      height: ScreenSize.height * 0.3,
-                      width: ScreenSize.width,
-                      color: MyColors.slateBlue,
-                      child: const Center(
-                        child: Text("personal Deshboard"),
-                      ),
-                    ),
+                        height: ScreenSize.height * 0.3,
+                        width: ScreenSize.width,
+                        //  color: MyColors.slateBlue,
+                        child: const PersonalDashboard()),
                     const Text(
                       "My deshboard",
                       style: CustomTextStyle.regularStyle,
