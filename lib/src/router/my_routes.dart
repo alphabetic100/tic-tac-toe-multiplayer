@@ -32,7 +32,7 @@ final GoRouter router = GoRouter(
           name: "signUp",
           path: '/signUp',
           builder: (BuildContext context, GoRouterState state) {
-            return const SignUpScreen();
+            return SignUpScreen();
           },
         ),
       ],

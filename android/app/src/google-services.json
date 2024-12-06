@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "488713355871",
+    "project_id": "tic-tac-toe-multiplayer-a7851",
+    "storage_bucket": "tic-tac-toe-multiplayer-a7851.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488713355871:android:638455d6fd7efafea591ea",
+        "android_client_info": {
+          "package_name": "com.example.tic_tac_toe_multiplayer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488713355871-9f7bg2bce11ouuda668bs6oomhghd6ai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGq3iiQ9yc0PIBoLh5o5iw9NJqJPbotdA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488713355871-9f7bg2bce11ouuda668bs6oomhghd6ai.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

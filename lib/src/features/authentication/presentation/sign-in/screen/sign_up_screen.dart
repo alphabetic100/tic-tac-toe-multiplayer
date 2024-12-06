@@ -9,10 +9,12 @@ import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/or.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/botom_view.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-in/values/sign_in_values.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/auth_services.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
-
+  SignUpScreen({super.key});
+  final AuthServices services = AuthServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,26 +73,46 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     CustomTextField(
                       labelText: "enter yor full name",
-                      onChanged: (value) {},
-                      onSubmitted: (value) {},
+                      onChanged: (value) {
+                        fullName = value;
+                      },
+                      onSubmitted: (value) {
+                        fullName = value;
+                      },
                     ),
                     const HorizontalSpace(height: 20),
                     CustomTextField(
                       labelText: "enter your email",
-                      onChanged: (value) {},
-                      onSubmitted: (value) {},
+                      onChanged: (value) {
+                        email = value;
+                      },
+                      onSubmitted: (value) {
+                        email = value;
+                      },
                     ),
                     const HorizontalSpace(height: 20),
                     CustomTextField(
                       labelText: "enter your password",
                       enableObsecureText: true,
-                      onChanged: (value) {},
-                      onSubmitted: (value) {},
+                      onChanged: (value) {
+                        password = value;
+                      },
+                      onSubmitted: (value) {
+                        password = value;
+                      },
                     ),
                     const HorizontalSpace(height: 20),
-                    const HorizontalSpace(height: 20),
                     CustomButton(
-                      onTap: () {},
+                      onTap: () async {
+                        if (fullName.isNotEmpty &&
+                            email.isNotEmpty &&
+                            password.isNotEmpty) {
+                          services.signUp(
+                              fullName: fullName,
+                              email: email,
+                              password: password);
+                        }
+                      },
                       child: const Text(
                         "Create account",
                         style: CustomTextStyle.buttonTextstyle,
