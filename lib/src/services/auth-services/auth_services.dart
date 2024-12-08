@@ -14,13 +14,21 @@ class AuthServices {
         password: password,
       );
 
-      await userCredential.user?.updateDisplayName(fullName);
-      await userCredential.user!.reload();
+      if (userCredential.user != null) {
+        // User creation succeeded
+      }
     } on FirebaseAuthException catch (e) {
-      Get.defaultDialog(title: "Allert", middleText: e.message.toString());
-      throw Exception(e.message);
+      // Ensure the dialog shows the error
+      Get.defaultDialog(
+        title: "Alert",
+        middleText: e.message ?? "An unknown error occurred",
+      );
     } catch (e) {
-      throw Exception(e);
+      // Handle any other exceptions
+      Get.defaultDialog(
+        title: "Error",
+        middleText: e.toString(),
+      );
     }
   }
 }

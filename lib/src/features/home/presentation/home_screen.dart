@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/custom_button.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/personal-deshboard/view/personal_dashboard.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custome_size_box.dart';
@@ -43,54 +45,81 @@ class HomeScreen extends StatelessWidget {
       ),
       drawer: const ProfileDrawer(),
       backgroundColor: MyColors.white,
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: ScreenSize.height - (kToolbarHeight + 25),
-          width: ScreenSize.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const HorizontalSpace(height: 20),
-                    const Center(
-                      child: Text(
-                        "Tic Tac Toe",
-                        style: CustomTextStyle.introStyle,
-                      ),
-                    ),
-                    const Center(
-                      child: Text(
-                        "Multiplayer edition!",
-                        style: CustomTextStyle.regularStyle,
-                      ),
-                    ),
-                    HorizontalSpace(height: ScreenSize.height * 0.1),
-                    Container(
-                        height: ScreenSize.height * 0.3,
-                        width: ScreenSize.width,
-                        //  color: MyColors.slateBlue,
-                        child: const PersonalDashboard()),
-                    const Text(
-                      "My deshboard",
-                      style: CustomTextStyle.regularStyle,
-                    ),
-                    HorizontalSpace(height: ScreenSize.height * 0.10),
-                    const OptionsView()
-                  ],
-                ),
+      body: SizedBox(
+        height: ScreenSize.height,
+        width: ScreenSize.width,
+        child: Column(
+          children: [
+            // fixed bar
+            const HorizontalSpace(height: 20),
+            const Center(
+              child: Text(
+                "Tic Tac Toe",
+                style: CustomTextStyle.introStyle,
               ),
-              BottomView(
-                bottomViewtitle: "click to read the trums and conditions",
-                navigationTitle: "Here",
-                ontap: () {},
-              )
-            ],
-          ),
+            ),
+            const Center(
+              child: Text(
+                "Multiplayer edition!",
+                style: CustomTextStyle.regularStyle,
+              ),
+            ),
+            // boady part
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        HorizontalSpace(height: ScreenSize.height * 0.05),
+                        const Text(
+                          "My deshboard",
+                          style: CustomTextStyle.regularStyle,
+                        ),
+                        const HorizontalSpace(height: 10),
+                        SizedBox(
+                            height: ScreenSize.height * 0.3,
+                            width: ScreenSize.width,
+                            // color: MyColors.slateBlue,
+                            child: const PersonalDashboard()),
+                        HorizontalSpace(height: ScreenSize.height * 0.05),
+                        // game mode
+                        const OptionsView(),
+                        const HorizontalSpace(height: 20),
+                        CustomButton(
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.person_search_rounded,
+                                  color: MyColors.white,
+                                ),
+                                VerticalSpace(width: 10),
+                                Text(
+                                  "see global rank",
+                                  style: CustomTextStyle.buttonTextstyle,
+                                )
+                              ],
+                            ),
+                            onTap: () {
+                              context.pushNamed("globalRank");
+                            })
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            BottomView(
+              bottomViewtitle: "click to read the trums and conditions",
+              navigationTitle: "Here",
+              ontap: () {},
+            ),
+          ],
         ),
       ),
     );

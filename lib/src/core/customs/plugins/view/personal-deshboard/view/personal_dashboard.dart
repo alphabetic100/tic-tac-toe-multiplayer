@@ -10,9 +10,9 @@ class PersonalDashboard extends StatelessWidget {
     return LineChart(
       LineChartData(
         minX: 0,
-        maxX: 19,
+        maxX: 10,
         minY: 0,
-        maxY: 6,
+        maxY: 10,
         gridData: FlGridData(
           show: true,
           getDrawingHorizontalLine: (value) {
@@ -43,27 +43,30 @@ class PersonalDashboard extends StatelessWidget {
             //   right: BorderSide.none,
             // ),
             ),
-        backgroundColor: MyColors.lightGrey,
+        backgroundColor: MyColors.slateBlue.withOpacity(0.5),
         lineBarsData: [
           LineChartBarData(
-            isCurved: true,
-            color: MyColors.vividBlue,
-            spots: [
-              const FlSpot(0, 0),
-              const FlSpot(5, 1),
-              const FlSpot(10, 2),
-              const FlSpot(15, 3),
-              const FlSpot(19, 4),
-            ],
-          ),
+              isCurved: true,
+              color: MyColors.vividBlue,
+              spots: [
+                const FlSpot(0, 0),
+                const FlSpot(1, 1),
+                const FlSpot(2, 2),
+                const FlSpot(3, 3),
+                const FlSpot(4, 4),
+              ],
+              belowBarData: BarAreaData(
+                show: true,
+                color: MyColors.vividBlue.withOpacity(0.5),
+              )),
         ],
         titlesData: FlTitlesData(
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
-                reservedSize: 40,
+                reservedSize: 30,
                 getTitlesWidget: (value, meta) {
-                  return Text(value.toString()[0]);
+                  return Text(value.toString().split(".")[0]);
                 },
               ),
             ),
@@ -72,8 +75,7 @@ class PersonalDashboard extends StatelessWidget {
               showTitles: true,
               reservedSize: 40,
               getTitlesWidget: (value, meta) {
-                return Text(
-                    value.toString().substring(0, 2).replaceAll(".", ""));
+                return Text(value.toString().split(".")[0]);
               },
             )),
             rightTitles: const AxisTitles(

@@ -18,7 +18,7 @@ class OptionsView extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                context.pushNamed("logIn");
+                context.pushNamed("createGameRoom");
                 //TODO: have to implement play offline page
               },
               child: Container(
@@ -37,7 +37,7 @@ class OptionsView extends StatelessWidget {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: MyColors.slateBlue,
+                      color: MyColors.vividBlue,
                       borderRadius: BorderRadius.circular(18)),
                   child: Center(
                     child: Icon(
@@ -61,7 +61,7 @@ class OptionsView extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                context.pushNamed("signUp");
+                context.pushNamed("createGameRoom");
                 //TODO: have to implement play offline page
               },
               child: Container(
@@ -79,7 +79,7 @@ class OptionsView extends StatelessWidget {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: MyColors.slateBlue,
+                      color: MyColors.vividBlue,
                       borderRadius: BorderRadius.circular(18)),
                   child: Center(
                     child: Icon(

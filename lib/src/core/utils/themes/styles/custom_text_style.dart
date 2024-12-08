@@ -27,4 +27,22 @@ class CustomTextStyle {
     color: MyColors.white,
     fontWeight: FontWeight.w100,
   );
+  static const TextStyle oTextStyle = TextStyle(
+    fontFamily: syneMono,
+    fontSize: 18,
+    color: MyColors.turquoise,
+    fontWeight: FontWeight.w100,
+  );
+  static const TextStyle xTextStyle = TextStyle(
+    fontFamily: syneMono,
+    fontSize: 18,
+    color: MyColors.vividBlue,
+    fontWeight: FontWeight.w100,
+  );
+  static const TextStyle drawTextStyle = TextStyle(
+    fontFamily: syneMono,
+    fontSize: 18,
+    color: Colors.brown,
+    fontWeight: FontWeight.w100,
+  );
 }
