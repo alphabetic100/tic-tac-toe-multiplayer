@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tic_tac_toe_multiplayer"
+    namespace = "com.example.tic_tac_toe_multiplayer"  // Ensure this matches your app's package name
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -19,13 +19,13 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8
     }
 
-    defaultConfig {
-        applicationId = "com.example.tic_tac_toe_multiplayer"  // Ensure this matches the app's package name
-        minSdk = 23
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
-    }
+  defaultConfig {
+    applicationId "com.example.tic_tac_toe_multiplayer"  // This must match the Firebase project package name
+    minSdk = 23
+    targetSdk = flutter.targetSdkVersion
+    versionCode = flutter.versionCode
+    versionName = flutter.versionName
+}
 
     buildTypes {
         release {
@@ -35,8 +35,14 @@ android {
 }
 
 flutter {
-    source = "../.."
+    source = "../.." 
 }
 
-// Add this at the bottom of the file to apply the Google services plugin
 apply plugin: 'com.google.gms.google-services'
+
+dependencies {
+    implementation 'com.google.firebase:firebase-auth:21.1.0'  
+    implementation 'com.google.firebase:firebase-firestore:24.3.0'  
+    implementation 'com.google.firebase:firebase-core:21.0.0' 
+    
+}

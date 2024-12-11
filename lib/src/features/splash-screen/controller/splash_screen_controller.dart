@@ -7,7 +7,7 @@ class ScreenController extends GetxController {
   Future<void> switchScreen(BuildContext context) async {
     if (isLoaded.value) {
       Future.delayed(const Duration(seconds: 2), () {
-        context.goNamed("home");
+        context.goNamed("signUp");
       });
     }
   }
