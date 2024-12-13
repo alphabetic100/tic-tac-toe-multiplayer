@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tic_tac_toe_multiplayer/src/services/auth-services/local/local_storage_service.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/local/local_storage_service.dart';
 
 class ScreenController extends GetxController {
   final LocalStorageService storageService = LocalStorageService();

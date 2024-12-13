@@ -9,10 +9,11 @@ import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/botom_view.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/home/components/options_view.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/home/components/profile_drawer.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/local/local_storage_service.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
+  HomeScreen({super.key});
+  final LocalStorageService localStorageService = LocalStorageService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,8 +106,9 @@ class HomeScreen extends StatelessWidget {
                                 )
                               ],
                             ),
-                            onTap: () {
-                              context.pushNamed("globalRank");
+                            onTap: () async {
+                              await localStorageService.deleteToken();
+                              // context.pushNamed("globalRank");
                             })
                       ],
                     ),

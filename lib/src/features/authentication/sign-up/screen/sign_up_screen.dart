@@ -13,10 +13,10 @@ import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/or.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/botom_view.dart';
-import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/components/image_picker_dialog.dart';
-import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/controller/loading_indicator_controller.dart';
-import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/service/local-service/local_image_picker.dart';
-import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/values/sign_in_values.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/components/image_picker_dialog.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/controller/loading_indicator_controller.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/service/local-service/local_image_picker.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/values/sign_in_values.dart';
 import 'package:tic_tac_toe_multiplayer/src/services/auth-services/auth_services.dart';
 
 class SignUpScreen extends StatelessWidget {

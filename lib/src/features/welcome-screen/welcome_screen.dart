@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/constants/animation_asset.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/custom_button.dart';
+import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custome_size_box.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
@@ -21,19 +22,11 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Are you ready to make your move? Let the fun begin!",
+                "Welcome to Tic Tac Toe: A Battle of Wits!",
                 style: CustomTextStyle.titleStyle,
                 textAlign: TextAlign.center,
               ),
-              const HorizontalSpace(height: 20),
-              const Text(
-                "Tic Tac Toe",
-                style: CustomTextStyle.introStyle,
-              ),
-              const Text(
-                "(multiplayer edition)",
-                style: CustomTextStyle.titleStyle,
-              ),
+              HorizontalSpace(height: ScreenSize.height * 0.1),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.4,
                 child: Lottie.asset(
@@ -43,7 +36,7 @@ class WelcomeScreen extends StatelessWidget {
                   backgroundLoading: true,
                 ),
               ),
-              const HorizontalSpace(height: 20),
+              HorizontalSpace(height: ScreenSize.height * 0.1),
               CustomButton(
                 child: const Text(
                   "Lets Begain",

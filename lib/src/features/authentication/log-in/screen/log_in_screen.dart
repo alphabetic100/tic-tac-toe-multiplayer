@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/custom_button.dart';
+import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/custom_loading_indicator.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/custom_text_field.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/login_mathodes_view.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
@@ -9,9 +11,20 @@ import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/or.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/botom_view.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/components/login_error_dialog.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/components/login_success_dialog.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/controller/login_loading_controller.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/controller/login_success_checker.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/values/login_values.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/auth_services.dart';
 
 class LogInScreen extends StatelessWidget {
-  const LogInScreen({super.key});
+  LogInScreen({super.key});
+  final LoginLoadingController loadingController =
+      Get.put(LoginLoadingController());
+  final LoginSuccessChecker loginSuccessChecker =
+      Get.put(LoginSuccessChecker());
+  final AuthServices authServices = AuthServices();
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +48,23 @@ class LogInScreen extends StatelessWidget {
                     HorizontalSpace(height: ScreenSize.height * 0.12),
                     CustomTextField(
                       labelText: "enter your email",
-                      onChanged: (value) {},
-                      onSubmitted: (value) {},
+                      onChanged: (value) {
+                        loginEmail = value;
+                      },
+                      onSubmitted: (value) {
+                        loginEmail = value;
+                      },
                     ),
                     const HorizontalSpace(height: 20),
                     CustomTextField(
                       labelText: "enter your password",
                       enableObsecureText: true,
-                      onChanged: (value) {},
-                      onSubmitted: (value) {},
+                      onChanged: (value) {
+                        loginPassword = value;
+                      },
+                      onSubmitted: (value) {
+                        loginPassword = value;
+                      },
                     ),
                     const HorizontalSpace(height: 20),
                     SizedBox(
@@ -61,10 +82,33 @@ class LogInScreen extends StatelessWidget {
                     ),
                     const HorizontalSpace(height: 20),
                     CustomButton(
-                      onTap: () {},
-                      child: const Text(
-                        "Log In",
-                        style: CustomTextStyle.buttonTextstyle,
+                      onTap: () async {
+                        await authServices.logInUser(loginEmail, loginPassword);
+                        if (loginSuccessChecker.loginSuccessChecker.value) {
+                          print("Showing success dialog");
+                          showDialog(
+                            context: context,
+                            builder: (_) => const LoginSuccessDialog(),
+                          );
+                          Future.delayed(const Duration(seconds: 2), () {
+                            context.goNamed("home");
+                          });
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (_) => const LoginErrorDialog(
+                              errorMassage: "Invalid username or password",
+                            ),
+                          );
+                        }
+                      },
+                      child: Obx(
+                        () => loadingController.isLoginLoading.value
+                            ? const CustomLoadingIndicator()
+                            : const Text(
+                                "Log In",
+                                style: CustomTextStyle.buttonTextstyle,
+                              ),
                       ),
                     ),
                     HorizontalSpace(height: ScreenSize.height * 0.1),

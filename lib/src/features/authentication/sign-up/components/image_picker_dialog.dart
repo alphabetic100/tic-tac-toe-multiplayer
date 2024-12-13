@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custome_size_box.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
-import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/service/local-service/local_image_picker.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/service/local-service/local_image_picker.dart';
 
 class ImagePickerDialog extends StatelessWidget {
   ImagePickerDialog({super.key});

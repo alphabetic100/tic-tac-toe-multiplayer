@@ -1,0 +1,2 @@
+String loginEmail = "";
+String loginPassword = "";

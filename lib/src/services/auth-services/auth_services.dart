@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/controller/loading_indicator_controller.dart';
-import 'package:tic_tac_toe_multiplayer/src/services/auth-services/local/local_storage_service.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/controller/login_loading_controller.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/controller/login_success_checker.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/controller/loading_indicator_controller.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/local/local_storage_service.dart';
 import 'package:tic_tac_toe_multiplayer/src/services/auth-services/sign_up_service.dart';
 
 class AuthServices {
@@ -9,6 +11,10 @@ class AuthServices {
   final SignUpService signUpService = SignUpService();
   final LoadingIndicatorController indicatorController =
       Get.put(LoadingIndicatorController());
+  final LoginLoadingController loginLoadingController =
+      Get.put(LoginLoadingController());
+  final LoginSuccessChecker loginSuccessChecker =
+      Get.put(LoginSuccessChecker());
   Future<void> signUp({
     required String email,
     required String password,
@@ -34,6 +40,28 @@ class AuthServices {
     } catch (e) {
       indicatorController.isLoading.value = false;
       throw Exception("something went wrong! error: $e");
+    }
+  }
+
+  // Log in service
+  Future<void> logInUser(String email, String password) async {
+    try {
+      loginLoadingController.isLoginLoading.value = true;
+
+  await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      loginSuccessChecker.loginSuccessChecker.value = true;
+    
+    } on FirebaseAuthException catch (e) {
+      loginSuccessChecker.loginSuccessChecker.value = false;
+      throw Exception("something went wrong, error: $e");
+    } catch (e) {
+      loginSuccessChecker.loginSuccessChecker.value = false;
+      throw Exception("something went wrong, error: $e");
+    } finally {
+      loginLoadingController.isLoginLoading.value = false;
     }
   }
 }
