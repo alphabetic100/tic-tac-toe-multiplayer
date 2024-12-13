@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/controller/loading_indicator_controller.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/local/local_storage_service.dart';
 import 'package:tic_tac_toe_multiplayer/src/services/auth-services/sign_up_service.dart';
 
 class AuthServices {
+  final LocalStorageService storageService = LocalStorageService();
   final SignUpService signUpService = SignUpService();
   final LoadingIndicatorController indicatorController =
       Get.put(LoadingIndicatorController());
@@ -21,6 +23,7 @@ class AuthServices {
 
       if (userCredential.user != null) {
         String userUid = userCredential.user!.uid;
+        storageService.saveToken(userUid);
         String? userEmail = userCredential.user!.email;
         signUpService.getAuthData(userUid, userEmail);
         await signUpService.createUserData();
@@ -28,33 +31,9 @@ class AuthServices {
     } on FirebaseAuthException catch (e) {
       indicatorController.isLoading.value = false;
       throw Exception(e.message);
-      // AlertDialog(
-      //   title: const Text("Error"),
-      //   content: Text(e.message ?? "An unknown error occurred"),
-      //   actions: [
-      //     TextButton(
-      //       onPressed: () {
-      //         Get.back();
-      //       },
-      //       child: const Text("OK"),
-      //     ),
-      //   ],
-      // );
     } catch (e) {
       indicatorController.isLoading.value = false;
       throw Exception("something went wrong! error: $e");
-      // AlertDialog(
-      //   title: const Text("Error"),
-      //   content: const Text("Something went wrong!"),
-      //   actions: [
-      //     TextButton(
-      //       onPressed: () {
-      //         Get.back();
-      //       },
-      //       child: const Text("OK"),
-      //     ),
-      //   ],
-      // );
     }
   }
 }

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/constants/const_values.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/controller/loading_indicator_controller.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/values/sign_in_values.dart';
-import 'package:tic_tac_toe_multiplayer/src/services/model/create_user_data_model.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/model/create_user_data_model.dart';
 
 class SignUpService {
   final CreateUserDataModel userDataModel = CreateUserDataModel();

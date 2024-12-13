@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -11,7 +13,9 @@ import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/or.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/botom_view.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/components/image_picker_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/controller/loading_indicator_controller.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/service/local-service/local_image_picker.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/presentation/sign-up/values/sign_in_values.dart';
 import 'package:tic_tac_toe_multiplayer/src/services/auth-services/auth_services.dart';
 
@@ -20,6 +24,7 @@ class SignUpScreen extends StatelessWidget {
   final AuthServices services = AuthServices();
   final LoadingIndicatorController indicatorController =
       Get.put(LoadingIndicatorController());
+  final LocalImagePicker imagePicker = Get.put(LocalImagePicker());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,13 +55,21 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       child: Stack(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: CircleAvatar(
-                              radius: 5003,
-                              backgroundColor: MyColors.lightGrey,
-                            ),
-                          ),
+                          //Showing picked Image
+                          Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Obx(() {
+                                return CircleAvatar(
+                                    radius: 5003,
+                                    backgroundColor: MyColors.lightGrey,
+                                    backgroundImage: imagePicker
+                                            .pickedImagePath.value.isNotEmpty
+                                        ? FileImage(
+                                            File(imagePicker
+                                                .pickedImagePath.value),
+                                          )
+                                        : null);
+                              })),
                           Positioned(
                               bottom: 0,
                               right: 10,
@@ -65,7 +78,14 @@ class SignUpScreen extends StatelessWidget {
                                     backgroundColor: WidgetStatePropertyAll(
                                         MyColors.turquoise)),
                                 onPressed: () {
-                                  //TODO: Open Image Piceker
+                                  imagePicker.openImagePicker();
+
+                                  if (imagePicker.callImagePicker.value) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            ImagePickerDialog());
+                                  }
                                 },
                                 icon: const Icon(
                                   Icons.add_a_photo,
@@ -117,9 +137,7 @@ class SignUpScreen extends StatelessWidget {
                         },
                         child: Obx(
                           () => indicatorController.isLoading.value
-                              ? const Center(child: CustomLoadingIndicator(
-                                
-                              ))
+                              ? const Center(child: CustomLoadingIndicator())
                               : const Text(
                                   "Create account",
                                   style: CustomTextStyle.buttonTextstyle,
