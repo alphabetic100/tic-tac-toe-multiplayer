@@ -6,6 +6,7 @@ import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/view/creat
 import 'package:tic_tac_toe_multiplayer/src/features/global-rank/view/global_rank_view.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/home/presentation/home_screen.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/splash-screen/splash_screen.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/welcome-screen/welcome_screen.dart';
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
@@ -15,7 +16,15 @@ final GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return const SplashScreen();
       },
+      
       routes: <RouteBase>[
+         GoRoute(
+          name: "welcome",
+          path: '/welcome',
+          builder: (BuildContext context, GoRouterState state) {
+            return const WelcomeScreen();
+          },
+        ),
         GoRoute(
           name: "home",
           path: '/home',

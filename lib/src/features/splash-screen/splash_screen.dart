@@ -18,6 +18,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    screenController.simulateLoading(context);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
   @override
@@ -34,11 +40,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 gameSplash,
                 repeat: false,
                 fit: BoxFit.fill,
-                addRepaintBoundary: true,
-                onLoaded: (p0) {
-                  screenController.isLoaded.value = true;
-                  screenController.switchScreen(context);
-                },
                 backgroundLoading: true,
               ),
             ),

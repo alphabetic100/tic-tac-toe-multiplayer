@@ -18,12 +18,16 @@ class BottomView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 40,
-      color: MyColors.slateBlue,
+      color: MyColors.vividBlue.withOpacity(0.4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(bottomViewtitle),
+          Text(
+            bottomViewtitle,
+            style: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16),
+          ),
           const VerticalSpace(width: 10),
           InkWell(
             onTap: ontap,
