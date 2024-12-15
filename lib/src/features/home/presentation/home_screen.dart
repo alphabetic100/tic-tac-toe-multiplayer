@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
           const VerticalSpace(width: 12),
         ],
       ),
-      drawer: const ProfileDrawer(),
+      drawer: ProfileDrawer(),
       backgroundColor: MyColors.white,
       body: SizedBox(
         height: ScreenSize.height,
