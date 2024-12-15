@@ -6,9 +6,12 @@ import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
-    required this.child, required this.onTap,
+    required this.onTap,
+    required this.child,
+    this.color,
   });
   final Callback onTap;
+  final Color? color;
   final Widget child;
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class CustomButton extends StatelessWidget {
         width: ScreenSize.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: MyColors.slateBlue,
+          color: color ?? MyColors.slateBlue,
         ),
         child: Center(
           child: child,

@@ -48,12 +48,13 @@ class AuthServices {
     try {
       loginLoadingController.isLoginLoading.value = true;
 
-  await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      await storageService.saveToken(userCredential.user!.uid);
       loginSuccessChecker.loginSuccessChecker.value = true;
-    
     } on FirebaseAuthException catch (e) {
       loginSuccessChecker.loginSuccessChecker.value = false;
       throw Exception("something went wrong, error: $e");

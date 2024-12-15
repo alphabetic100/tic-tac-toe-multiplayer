@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/custom_button.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/custom_loading_indicator.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
@@ -9,6 +8,8 @@ import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/home/profile/controller/profile_data_controller.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/home/profile/service/profile_service.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/home/profile/view/components/log_out_alert_dialog.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/home/profile/view/components/update_profile_details_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/services/local/local_storage_service.dart';
 
 class ProfileDrawer extends StatefulWidget {
@@ -33,7 +34,7 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
     return Drawer(
       backgroundColor: MyColors.white,
       child: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
           child: Obx(() {
             if (dataController.isLoading.value) {
               return const Center(
@@ -41,35 +42,59 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
               );
             } else {
               return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  HorizontalSpace(height: ScreenSize.height * 0.05),
-                  Center(
-                    child: CircleAvatar(
-                      radius: ScreenSize.height * 0.1,
-                      backgroundColor: MyColors.grayishBlue,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        HorizontalSpace(height: ScreenSize.height * 0.05),
+                        Center(
+                          child: CircleAvatar(
+                            radius: ScreenSize.height * 0.1,
+                            backgroundColor: MyColors.grayishBlue,
+                          ),
+                        ),
+                        const HorizontalSpace(height: 20),
+                        Text(
+                          profileService.userData!.fullName,
+                          style: CustomTextStyle.titleStyle,
+                        ),
+                        Text(
+                          profileService.userData!.email,
+                          style: CustomTextStyle.regularStyle,
+                        ),
+                        HorizontalSpace(height: ScreenSize.height * 0.3),
+                      ],
                     ),
                   ),
-                  const HorizontalSpace(height: 20),
-                  Text(
-                    profileService.userData!.fullName,
-                    style: CustomTextStyle.titleStyle,
-                  ),
-                  Text(
-                    profileService.userData!.email,
-                    style: CustomTextStyle.regularStyle,
-                  ),
-                  Text(
-                    profileService.userData!.createdAt,
-                    style: CustomTextStyle.regularStyle,
-                  ),
-                  HorizontalSpace(height: ScreenSize.height * 0.3),
+                  // Update button
                   CustomButton(
-                      child: const Text("Log out"),
-                      onTap: () async {
-                        await storageService.deleteToken();
-                        context.pushNamed("welcome");
-                      })
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) =>  UpdateProfileDetailsDialog());
+                      },
+                      child: const Text(
+                        "Update Profile details",
+                        style: CustomTextStyle.buttonTextstyle,
+                      )),
+                  const HorizontalSpace(height: 20),
+                  CustomButton(
+                    onTap: () async {
+                      showDialog(
+                        context: context,
+                        builder: (_) {
+                          return LogOutAlertDialog();
+                        },
+                      );
+                    },
+                    color: Colors.redAccent.shade200,
+                    child: const Text(
+                      "Log out",
+                      style: CustomTextStyle.buttonTextstyle,
+                    ),
+                  )
                 ],
               );
             }

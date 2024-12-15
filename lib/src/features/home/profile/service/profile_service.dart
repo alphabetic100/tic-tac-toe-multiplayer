@@ -6,6 +6,7 @@ import 'package:tic_tac_toe_multiplayer/src/features/home/profile/model/user_pro
 import 'package:tic_tac_toe_multiplayer/src/services/local/local_storage_service.dart';
 
 class ProfileService {
+  final storageService = LocalStorageService();
   UserModel? userData;
   final ProfileDataController dataController = Get.put(ProfileDataController());
   fetchProfileData() async {
@@ -24,7 +25,6 @@ class ProfileService {
 
   Future<UserModel?> getProfileDataA() async {
     try {
-      final storageService = LocalStorageService();
       var uid = await storageService.getToken();
       final userData =
           await FirebaseFirestore.instance.collection(users).doc(uid).get();
@@ -35,5 +35,22 @@ class ProfileService {
       throw Exception("something went wrong, error: $e");
     }
     return null;
+  }
+
+  // Update Profile Data,
+  Future<void> updateUserData(
+    String? fullName,
+  ) async {
+    if (fullName != null) {
+      try {
+        var uid = await storageService.getToken();
+        // final instance =
+        FirebaseFirestore.instance.collection(users).doc(uid).update({
+          "fullName": fullName,
+        });
+      } catch (e) {
+        throw Exception("something went wrong, error: $e");
+      }
+    }
   }
 }
