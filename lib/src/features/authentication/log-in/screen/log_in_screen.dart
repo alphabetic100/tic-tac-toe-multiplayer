@@ -11,6 +11,7 @@ import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/or.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/botom_view.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/func/email_pass_velidation_checker.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/components/login_error_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/components/login_success_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/controller/login_loading_controller.dart';
@@ -83,23 +84,34 @@ class LogInScreen extends StatelessWidget {
                     const HorizontalSpace(height: 20),
                     CustomButton(
                       onTap: () async {
-                        await authServices.logInUser(loginEmail, loginPassword);
-                        if (loginSuccessChecker.loginSuccessChecker.value) {
-                          print("Showing success dialog");
-                          showDialog(
-                            context: context,
-                            builder: (_) => const LoginSuccessDialog(),
-                          );
-                          Future.delayed(const Duration(seconds: 2), () {
-                            context.goNamed("home");
-                          });
+                        if (isEmailPasswordValid(loginEmail, loginPassword)) {
+                          await authServices.logInUser(
+                              loginEmail, loginPassword);
+                          if (loginSuccessChecker.loginSuccessChecker.value) {
+                            print("Showing success dialog");
+                            showDialog(
+                              context: context,
+                              builder: (_) => const LoginSuccessDialog(),
+                            );
+                            Future.delayed(const Duration(seconds: 2), () {
+                              context.goNamed("home");
+                            });
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (_) => const LoginErrorDialog(
+                                errorMassage: "Invalid username or password",
+                              ),
+                            );
+                          }
                         } else {
                           showDialog(
-                            context: context,
-                            builder: (_) => const LoginErrorDialog(
-                              errorMassage: "Invalid username or password",
-                            ),
-                          );
+                              context: context,
+                              builder: (_) {
+                                return const LoginErrorDialog(
+                                    errorMassage:
+                                        "Email or password is not in valid formate");
+                              });
                         }
                       },
                       child: Obx(

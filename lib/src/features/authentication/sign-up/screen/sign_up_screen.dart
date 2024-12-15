@@ -13,6 +13,8 @@ import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/or.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/botom_view.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/func/email_pass_velidation_checker.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/components/login_error_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/components/image_picker_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/controller/loading_indicator_controller.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/service/local-service/local_image_picker.dart';
@@ -130,9 +132,13 @@ class SignUpScreen extends StatelessWidget {
                     CustomButton(
                         onTap: () async {
                           if (fullName.isNotEmpty &&
-                              email.isNotEmpty &&
-                              password.isNotEmpty) {
+                              isEmailPasswordValid(email, password)) {
                             services.signUp(email: email, password: password);
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (_) => const LoginErrorDialog(
+                                    errorMassage: "please input valid data"));
                           }
                         },
                         child: Obx(

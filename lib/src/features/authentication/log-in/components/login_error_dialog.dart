@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 
 class LoginErrorDialog extends StatelessWidget {
   const LoginErrorDialog({super.key, required this.errorMassage});
@@ -17,7 +18,7 @@ class LoginErrorDialog extends StatelessWidget {
         errorMassage,
         style: const TextStyle(
           color: Colors.red,
-          fontWeight: FontWeight.w300,
+          fontWeight: FontWeight.w400,
         ),
       ),
       actions: [
@@ -26,7 +27,13 @@ class LoginErrorDialog extends StatelessWidget {
               Navigator.of(context).pop();
             },
             child: const Center(
-              child: Text("ok"),
+              child: Text(
+                "ok",
+                style: TextStyle(
+                    color: MyColors.vividBlue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
             ))
       ],
     );

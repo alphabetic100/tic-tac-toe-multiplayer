@@ -21,12 +21,6 @@ class WelcomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Welcome to Tic Tac Toe: A Battle of Wits!",
-                style: CustomTextStyle.titleStyle,
-                textAlign: TextAlign.center,
-              ),
-              HorizontalSpace(height: ScreenSize.height * 0.1),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.4,
                 child: Lottie.asset(
@@ -36,7 +30,13 @@ class WelcomeScreen extends StatelessWidget {
                   backgroundLoading: true,
                 ),
               ),
+              const Text(
+                "Welcome to Tic Tac Toe: A Battle of Wits!",
+                style: CustomTextStyle.titleStyle,
+                textAlign: TextAlign.center,
+              ),
               HorizontalSpace(height: ScreenSize.height * 0.1),
+              // HorizontalSpace(height: ScreenSize.height * 0.1),
               CustomButton(
                 child: const Text(
                   "Lets Begain",
