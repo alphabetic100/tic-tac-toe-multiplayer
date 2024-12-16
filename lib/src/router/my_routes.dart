@@ -56,7 +56,7 @@ final GoRouter router = GoRouter(
           name: "createGameRoom",
           path: '/createGameRoom',
           builder: (BuildContext context, GoRouterState state) {
-            return const CreateGameRoom();
+            return  CreateGameRoom();
           },
         ),
       ],

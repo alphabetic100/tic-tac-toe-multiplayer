@@ -1,31 +1,35 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custom_o_widget.dart';
-import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custom_x_widget.dart';
 
 class PlayBoardController extends GetxController {
-  RxBool currentMove = false.obs; // false = X, true = O
-  // Initialize playBoardValues as RxList<Widget?> instead of just Widget?
-  RxList<Widget?> playBoardValues = List.generate(9, (_) => null).obs;
+  RxBool currentMove = false.obs;
 
-  void tapped(int index) {
-    // Prevent interaction if the cell is already filled
-    if (playBoardValues[index] != null) {
-      return;
-    }
+  RxList<String> playBoardValues = List.generate(9, (_) {
+    return "";
+  }).obs;
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    playBoardValues.clear();
+  }
 
-    // Assign the proper widget (X or O) based on the turn
-    playBoardValues[index] = currentMove.value
-        ? const CustomOWidget(large: true)
-        : const CustomXWidget(large: true);
-
-    // Toggle the current move between X and O
+  void changeMove() {
     currentMove.value = !currentMove.value;
   }
+  // void tapped(int index) {
+  //   return;
 
-  void resetGame() {
-    // Reset the playBoardValues to all null (empty cells)
-    playBoardValues.assignAll(List.generate(9, (_) => null));
-    currentMove.value = false; // Start with X's turn
-  }
+  //   //   playBoardValues[index] = currentMove.value
+  //   //       ? const CustomOWidget(large: true)
+  //   //       : const CustomXWidget(large: true);
+
+  //   //   currentMove.value = !currentMove.value;
+  //   // }
+
+  //   //   void resetGame() {
+  //   //     playBoardValues.assignAll(List.generate(9, (_) => null));
+  //   //     currentMove.value = false;
+  //   //   }
+  //   // }
+  // }
 }
