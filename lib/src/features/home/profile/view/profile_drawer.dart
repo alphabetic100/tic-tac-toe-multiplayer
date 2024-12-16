@@ -57,11 +57,11 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
                         ),
                         const HorizontalSpace(height: 20),
                         Text(
-                          profileService.userData!.fullName,
+                          profileService.userData?.fullName ?? "guest",
                           style: CustomTextStyle.titleStyle,
                         ),
                         Text(
-                          profileService.userData!.email,
+                          profileService.userData?.email ?? "guest@gmail.com",
                           style: CustomTextStyle.regularStyle,
                         ),
                         HorizontalSpace(height: ScreenSize.height * 0.3),
@@ -73,7 +73,7 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
                       onTap: () {
                         showDialog(
                             context: context,
-                            builder: (_) =>  UpdateProfileDetailsDialog());
+                            builder: (_) => UpdateProfileDetailsDialog());
                       },
                       child: const Text(
                         "Update Profile details",

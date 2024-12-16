@@ -11,15 +11,17 @@ class SignUpService {
       Get.put(LoadingIndicatorController());
   String _userUid = "";
   String _userEmail = "";
+  // String _imagePath = "";
 
   createUserData() async {
     if (_userUid.isNotEmpty) {
       try {
+       
         indicatorController.isLoading.value = true;
         await FirebaseFirestore.instance
             .collection(users)
             .doc(_userUid)
-            .set(userDataModel.createUser(fullName, _userEmail, ""));
+            .set(userDataModel.createUser(fullName, _userEmail ,""));
       } catch (e) {
         throw Exception("something went wrong! error: $e");
       } finally {
@@ -28,8 +30,13 @@ class SignUpService {
     }
   }
 
-  getAuthData(String userUid, String? email) async {
+  //  getImagePath(String imagePath) {
+  //  _imagePath = imagePath;
+  // }
+
+  getAuthData(String userUid, String? email,) async {
     _userUid = userUid;
     _userEmail = email ?? "";
+   
   }
 }

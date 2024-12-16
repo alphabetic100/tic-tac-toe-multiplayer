@@ -88,12 +88,13 @@ class LogInScreen extends StatelessWidget {
                           await authServices.logInUser(
                               loginEmail, loginPassword);
                           if (loginSuccessChecker.loginSuccessChecker.value) {
-                            print("Showing success dialog");
                             showDialog(
                               context: context,
-                              builder: (_) => const LoginSuccessDialog(),
+                              builder: (_) => const LoginSuccessDialog(
+                                successMassage: "Successfully Loged In",
+                              ),
                             );
-                            Future.delayed(const Duration(seconds: 2), () {
+                            Future.delayed(const Duration(seconds: 1), () {
                               context.goNamed("home");
                             });
                           } else {

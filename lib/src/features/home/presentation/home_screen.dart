@@ -108,6 +108,7 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                               onTap: () {
+                                // localStorageService.deleteToken();
                                 context.pushNamed("globalRank");
                               })
                         ],

@@ -84,9 +84,9 @@ class SignUpScreen extends StatelessWidget {
 
                                   if (imagePicker.callImagePicker.value) {
                                     showDialog(
-                                        context: context,
-                                        builder: (context) =>
-                                            ImagePickerDialog());
+                                      context: context,
+                                      builder: (context) => ImagePickerDialog(),
+                                    );
                                   }
                                 },
                                 icon: const Icon(
@@ -133,12 +133,18 @@ class SignUpScreen extends StatelessWidget {
                         onTap: () async {
                           if (fullName.isNotEmpty &&
                               isEmailPasswordValid(email, password)) {
-                            services.signUp(email: email, password: password);
+                            services.signUp(
+                        
+                              email: email,
+                              password: password,
+                              imagePath: "",
+                            );
                           } else {
                             showDialog(
-                                context: context,
-                                builder: (_) => const LoginErrorDialog(
-                                    errorMassage: "please input valid data"));
+                              context: context,
+                              builder: (_) => const LoginErrorDialog(
+                                  errorMassage: "please input valid data"),
+                            );
                           }
                         },
                         child: Obx(

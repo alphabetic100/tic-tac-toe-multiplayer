@@ -1,6 +1,6 @@
 class CreateUserDataModel {
   Map<String, dynamic> createUser(
-      String fullName, String email, dynamic image) {
+      String fullName, String email, String image) {
     return {
       'fullName': fullName,
       'email': email,

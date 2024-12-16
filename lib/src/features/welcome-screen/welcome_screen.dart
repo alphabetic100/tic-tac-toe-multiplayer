@@ -30,13 +30,13 @@ class WelcomeScreen extends StatelessWidget {
                   backgroundLoading: true,
                 ),
               ),
+              HorizontalSpace(height: ScreenSize.height * 0.1),
               const Text(
                 "Welcome to Tic Tac Toe: A Battle of Wits!",
                 style: CustomTextStyle.titleStyle,
                 textAlign: TextAlign.center,
               ),
-              HorizontalSpace(height: ScreenSize.height * 0.1),
-              // HorizontalSpace(height: ScreenSize.height * 0.1),
+              const HorizontalSpace(height: 20),
               CustomButton(
                 child: const Text(
                   "Lets Begain",
