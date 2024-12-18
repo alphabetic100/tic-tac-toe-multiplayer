@@ -2,34 +2,79 @@ import 'package:get/get.dart';
 
 class PlayBoardController extends GetxController {
   RxBool currentMove = false.obs;
-
+  RxBool xWins = false.obs;
+  RxBool oWins = false.obs;
+  RxString? winner = "".obs;
   RxList<String> playBoardValues = List.generate(9, (_) {
     return "";
   }).obs;
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    playBoardValues.clear();
+  clearBoard() {
+    playBoardValues.value = List.generate(9, (_) {
+      return "";
+    }).obs;
   }
 
   void changeMove() {
     currentMove.value = !currentMove.value;
   }
-  // void tapped(int index) {
-  //   return;
 
-  //   //   playBoardValues[index] = currentMove.value
-  //   //       ? const CustomOWidget(large: true)
-  //   //       : const CustomXWidget(large: true);
-
-  //   //   currentMove.value = !currentMove.value;
-  //   // }
-
-  //   //   void resetGame() {
-  //   //     playBoardValues.assignAll(List.generate(9, (_) => null));
-  //   //     currentMove.value = false;
-  //   //   }
-  //   // }
-  // }
+  void winCheck() {
+    List index = playBoardValues;
+    bool winnerFound = false;
+    if (!winnerFound) {
+      if (index[0] == "o" && index[1] == "o" && index[2] == "o") {
+        winnerFound = true;
+        winner?.value = "o";
+      } else if (index[3] == "o" && index[4] == "o" && index[5] == "o") {
+        winnerFound = true;
+        winner?.value = "o";
+      } else if (index[6] == "o" && index[7] == "o" && index[8] == "o") {
+        winnerFound = true;
+        winner?.value = "o";
+      } else if (index[0] == "o" && index[3] == "o" && index[6] == "o") {
+        winnerFound = true;
+        winner?.value = "o";
+      } else if (index[1] == "o" && index[4] == "o" && index[7] == "o") {
+        winnerFound = true;
+        winner?.value = "o";
+      } else if (index[2] == "o" && index[5] == "o" && index[8] == "o") {
+        winnerFound = true;
+        winner?.value = "o";
+      } else if (index[0] == "o" && index[4] == "o" && index[8] == "o") {
+        winnerFound = true;
+        winner?.value = "o";
+      } else if (index[2] == "o" && index[4] == "o" && index[6] == "o") {
+        winnerFound = true;
+        winner?.value = "o";
+      }
+      //for x
+      else if (index[0] == "x" && index[1] == "x" && index[2] == "x") {
+        winnerFound = true;
+        winner?.value = "x";
+      } else if (index[3] == "x" && index[4] == "x" && index[5] == "x") {
+        winnerFound = true;
+        winner?.value = "x";
+      } else if (index[6] == "x" && index[7] == "x" && index[8] == "x") {
+        winnerFound = true;
+        winner?.value = "x";
+      } else if (index[0] == "x" && index[3] == "x" && index[6] == "x") {
+        winnerFound = true;
+        winner?.value = "x";
+      } else if (index[1] == "x" && index[4] == "x" && index[7] == "x") {
+        winnerFound = true;
+        winner?.value = "x";
+      } else if (index[2] == "x" && index[5] == "x" && index[8] == "x") {
+        winnerFound = true;
+        winner?.value = "x";
+      } else if (index[0] == "x" && index[4] == "x" && index[8] == "x") {
+        winnerFound = true;
+        winner?.value = "x";
+      } else if (index[2] == "x" && index[4] == "x" && index[6] == "x") {
+        winnerFound = true;
+        winner?.value = "x";
+      } else {
+        winner?.value = "";
+      }
+    }
+  }
 }

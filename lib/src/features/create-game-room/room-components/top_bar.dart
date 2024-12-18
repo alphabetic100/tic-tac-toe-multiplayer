@@ -1,15 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custom_o_widget.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custom_x_widget.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custome_size_box.dart';
+import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/error_alert_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/controller/play_board_controller.dart';
 
 class TopBar extends StatelessWidget {
-  const TopBar({super.key});
-
+  TopBar({super.key});
+  final PlayBoardController playBoardController =
+      Get.put(PlayBoardController());
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -23,7 +28,20 @@ class TopBar extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pop();
+                    showDialog(
+                      context: context,
+                      builder: (_) {
+                        return ErrorAlertDialog(
+                            confirm: "Leave room",
+                            onConfirm: () {
+                              playBoardController.clearBoard();
+                              // Navigator.of(context).pop();
+                              context.goNamed("home");
+                            },
+                            errorMassage:
+                                "If you leave the room, you will lose");
+                      },
+                    );
                   },
                   child: Container(
                     height: 48,

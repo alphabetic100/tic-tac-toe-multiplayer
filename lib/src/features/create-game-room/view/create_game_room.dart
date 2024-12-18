@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/custom_button.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custom_o_widget.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custom_x_widget.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custome_size_box.dart';
+import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/error_alert_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/controller/play_board_controller.dart';
@@ -25,7 +27,7 @@ class CreateGameRoom extends StatelessWidget {
           child: Column(
             children: [
               //top bar
-              const TopBar(),
+               TopBar(),
               const HorizontalSpace(height: 10),
               // playBoard view
               PlayBoard(),
@@ -95,8 +97,32 @@ class CreateGameRoom extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
+              HorizontalSpace(height: ScreenSize.height * 0.05),
               //
+              SizedBox(
+                width: ScreenSize.width * 0.4,
+                child: CustomButton(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) {
+                          return ErrorAlertDialog(
+                              confirm: "Yes",
+                              onConfirm: () {
+                                playBoardController.clearBoard();
+                                Navigator.of(context).pop();
+                              },
+                              errorMassage:
+                                  "Are You sure you wanna cleare the board");
+                        },
+                      );
+                    },
+                    child: const Text(
+                      "clear Board",
+                      style: CustomTextStyle.buttonTextstyle,
+                    )),
+              )
             ],
           ),
         ),
