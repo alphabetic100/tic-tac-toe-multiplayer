@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custome_size_box.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/home/components/offline_mode_dialog.dart';
 
 class OptionsView extends StatelessWidget {
   const OptionsView({super.key});
@@ -18,8 +20,9 @@ class OptionsView extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                context.pushNamed("createGameRoom");
-                //TODO: have to implement play offline page
+                showDialog(
+                    context: context,
+                    builder: (_) => const OfflineModeDialog());
               },
               child: Container(
                 height: ScreenSize.height * 0.15,
@@ -61,8 +64,8 @@ class OptionsView extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                context.pushNamed("createGameRoom");
-                //TODO: have to implement play offline page
+                context.pushNamed("createGameRoom",
+                    queryParameters: {"playOnlineMode": "true"});
               },
               child: Container(
                 height: ScreenSize.height * 0.15,

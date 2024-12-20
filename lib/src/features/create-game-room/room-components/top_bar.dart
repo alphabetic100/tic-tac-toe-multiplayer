@@ -34,12 +34,16 @@ class TopBar extends StatelessWidget {
                         return ErrorAlertDialog(
                             confirm: "Leave room",
                             onConfirm: () {
-                              playBoardController.clearBoard();
+                              playBoardController.closeRoom();
                               // Navigator.of(context).pop();
                               context.goNamed("home");
                             },
+                            cencel: "cencel",
+                            onCencel: () {
+                              Navigator.of(context).pop();
+                            },
                             errorMassage:
-                                "If you leave the room, you will lose");
+                                "If you leave the room data will be cleared");
                       },
                     );
                   },
@@ -58,32 +62,11 @@ class TopBar extends StatelessWidget {
                     ),
                   ),
                 ),
-                // if game mode is online?? TODO:
                 const Text(
-                  "oponent name",
+                  "Offline mode",
                   style: CustomTextStyle.titleStyle,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: MyColors.lightGrey.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.person_add_alt_outlined,
-                          color: MyColors.vividBlue,
-                        ),
-                        Text(
-                          "Add friend",
-                          style: CustomTextStyle.regularStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                const SizedBox()
               ],
             ),
             const HorizontalSpace(height: 20),
@@ -93,21 +76,25 @@ class TopBar extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const Column(
+                    Column(
                       children: [
-                        CustomOWidget(large: false),
-                        Text(
-                          "1 wins",
-                          style: CustomTextStyle.oTextStyle,
-                        )
+                        const CustomOWidget(large: false),
+                        Obx(() {
+                          return Text(
+                            "${playBoardController.oWinTime.value} Wins",
+                            style: CustomTextStyle.oTextStyle,
+                          );
+                        })
                       ],
                     ),
-                    const Column(
+                    Column(
                       children: [
-                        CustomXWidget(large: false),
-                        Text(
-                          "1 wins",
-                          style: CustomTextStyle.xTextStyle,
+                        const CustomXWidget(large: false),
+                        Obx(
+                          () => Text(
+                            "${playBoardController.xWinTime.value} Wins",
+                            style: CustomTextStyle.xTextStyle,
+                          ),
                         )
                       ],
                     ),
@@ -118,9 +105,11 @@ class TopBar extends StatelessWidget {
                           color: Colors.brown,
                           size: ScreenSize.height * 0.04,
                         ),
-                        const Text(
-                          "1 draws",
-                          style: CustomTextStyle.drawTextStyle,
+                        Obx(
+                          () => Text(
+                            "${playBoardController.drawTime} draws",
+                            style: CustomTextStyle.drawTextStyle,
+                          ),
                         )
                       ],
                     )

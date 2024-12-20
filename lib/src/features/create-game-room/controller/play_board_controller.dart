@@ -4,12 +4,23 @@ class PlayBoardController extends GetxController {
   RxBool currentMove = false.obs;
   RxBool xWins = false.obs;
   RxBool oWins = false.obs;
+  RxInt xWinTime = 0.obs;
+  RxInt oWinTime = 0.obs;
+  RxInt drawTime = 0.obs;
   RxString? winner = "".obs;
   RxList<String> playBoardValues = List.generate(9, (_) {
     return "";
   }).obs;
   bool winnerFound = false;
   bool drawFound = false;
+
+  closeRoom() {
+    clearBoard();
+    oWinTime.value = 0;
+    xWinTime.value = 0;
+    drawTime.value = 0;
+  }
+
   //To clear The board Value
   clearBoard() {
     playBoardValues.value = List.generate(9, (_) {
@@ -17,6 +28,7 @@ class PlayBoardController extends GetxController {
     }).obs;
     winner!.value = "";
     winnerFound = false;
+    drawFound = false;
     countMove = 1;
   }
 
@@ -90,7 +102,7 @@ class PlayBoardController extends GetxController {
   int countMove = 1;
   void drawChecker() {
     countMove += 1;
-    if (countMove == 9 && winnerFound == false) {
+    if (countMove == 10 && winnerFound == false) {
       drawFound = true;
       countMove = 1;
     } else if (winnerFound) {

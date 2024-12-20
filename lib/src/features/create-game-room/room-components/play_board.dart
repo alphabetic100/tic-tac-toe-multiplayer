@@ -10,7 +10,8 @@ import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/controller
 
 class PlayBoard extends StatelessWidget {
   PlayBoard({super.key});
-  final PlayBoardController boardController = Get.put(PlayBoardController());
+  final PlayBoardController playBoardController =
+      Get.put(PlayBoardController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,34 +28,35 @@ class PlayBoard extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              if (boardController.playBoardValues[index].isEmpty) {
-                boardController.currentMove.value
-                    ? boardController.playBoardValues[index] = "x"
-                    : boardController.playBoardValues[index] = "o";
-                boardController.changeMove();
+              if (playBoardController.playBoardValues[index].isEmpty) {
+                playBoardController.currentMove.value
+                    ? playBoardController.playBoardValues[index] = "x"
+                    : playBoardController.playBoardValues[index] = "o";
+                playBoardController.changeMove();
               }
-              boardController.winCheck();
-              boardController.drawChecker();
-
-              print(boardController.countMove);
-              if (boardController.winner!.value == "x") {
+              playBoardController.winCheck();
+              playBoardController.drawChecker();
+              if (playBoardController.winner!.value == "x") {
+                playBoardController.xWinTime.value += 1;
                 {
                   showDialog(
                       context: context,
                       builder: (_) => const SuccessAlertDialog(
                           successMassage: "X is the winner"));
-                  boardController.clearBoard();
+                  playBoardController.clearBoard();
                 }
-              } else if (boardController.winner!.value == "o") {
+              } else if (playBoardController.winner!.value == "o") {
+                playBoardController.oWinTime.value += 1;
                 {
                   showDialog(
                       context: context,
                       builder: (_) => const SuccessAlertDialog(
                           successMassage: "O is the winner"));
-                  boardController.clearBoard();
+                  playBoardController.clearBoard();
                 }
               } else {
-                if (boardController.drawFound) {
+                if (playBoardController.drawFound) {
+                  playBoardController.drawTime.value += 1;
                   showDialog(
                       context: context,
                       builder: (_) => ErrorAlertDialog(
@@ -62,7 +64,7 @@ class PlayBoard extends StatelessWidget {
                             Navigator.of(context).pop();
                           },
                           errorMassage: "The game is draw"));
-                  boardController.clearBoard();
+                  playBoardController.clearBoard();
                 }
               }
             },
@@ -72,7 +74,7 @@ class PlayBoard extends StatelessWidget {
               color: MyColors.white,
               child: Center(
                 child: Obx(() {
-                  final cellValue = boardController.playBoardValues[index];
+                  final cellValue = playBoardController.playBoardValues[index];
                   if (cellValue == "x") {
                     return const CustomXWidget(large: true);
                   } else if (cellValue == "o") {
