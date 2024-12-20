@@ -27,6 +27,7 @@ class ErrorAlertDialog extends StatelessWidget {
       iconPadding: const EdgeInsets.all(8),
       content: Text(
         errorMassage,
+        textAlign: TextAlign.center,
         style: const TextStyle(
           color: Colors.red,
           fontWeight: FontWeight.w400,
@@ -34,33 +35,37 @@ class ErrorAlertDialog extends StatelessWidget {
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: onConfirm ??
-              () {
-                Navigator.of(context).pop();
-              },
-          child: Center(
-            child: Text(
-              confirm ?? "ok",
-              style: const TextStyle(
-                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-          ),
-        ),
-        TextButton(
-            onPressed: onCencel ??
+        if (confirm != null)
+          TextButton(
+            onPressed: onConfirm ??
                 () {
                   Navigator.of(context).pop();
                 },
             child: Center(
               child: Text(
-                cencel ?? "cencel",
+                confirm ?? "ok",
                 style: const TextStyle(
-                    color: MyColors.vividBlue,
+                    color: Colors.red,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
               ),
-            ))
+            ),
+          ),
+        if (cencel != null)
+          TextButton(
+              onPressed: onCencel ??
+                  () {
+                    Navigator.of(context).pop();
+                  },
+              child: Center(
+                child: Text(
+                  cencel ?? "cencel",
+                  style: const TextStyle(
+                      color: MyColors.vividBlue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+              )),
       ],
     );
   }

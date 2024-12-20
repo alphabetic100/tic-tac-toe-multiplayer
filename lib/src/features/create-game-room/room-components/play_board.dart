@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custom_o_widget.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custom_x_widget.dart';
+import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/error_alert_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/success_alert_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/controller/play_board_controller.dart';
@@ -33,7 +34,10 @@ class PlayBoard extends StatelessWidget {
                 boardController.changeMove();
               }
               boardController.winCheck();
-              if (boardController.winner?.value == "x") {
+              boardController.drawChecker();
+
+              print(boardController.countMove);
+              if (boardController.winner!.value == "x") {
                 {
                   showDialog(
                       context: context,
@@ -41,12 +45,23 @@ class PlayBoard extends StatelessWidget {
                           successMassage: "X is the winner"));
                   boardController.clearBoard();
                 }
-              } else if (boardController.winner?.value == "o") {
+              } else if (boardController.winner!.value == "o") {
                 {
                   showDialog(
                       context: context,
                       builder: (_) => const SuccessAlertDialog(
                           successMassage: "O is the winner"));
+                  boardController.clearBoard();
+                }
+              } else {
+                if (boardController.drawFound) {
+                  showDialog(
+                      context: context,
+                      builder: (_) => ErrorAlertDialog(
+                          onConfirm: () {
+                            Navigator.of(context).pop();
+                          },
+                          errorMassage: "The game is draw"));
                   boardController.clearBoard();
                 }
               }

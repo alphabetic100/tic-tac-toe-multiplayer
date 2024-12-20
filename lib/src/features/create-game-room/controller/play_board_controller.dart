@@ -8,10 +8,20 @@ class PlayBoardController extends GetxController {
   RxList<String> playBoardValues = List.generate(9, (_) {
     return "";
   }).obs;
+  bool winnerFound = false;
+  bool drawFound = false;
+  //To clear The board Value
   clearBoard() {
     playBoardValues.value = List.generate(9, (_) {
       return "";
     }).obs;
+    winner!.value = "";
+    winnerFound = false;
+    countMove = 1;
+  }
+
+  clearCurrentWinner() {
+    winner?.value = "";
   }
 
   void changeMove() {
@@ -19,8 +29,7 @@ class PlayBoardController extends GetxController {
   }
 
   void winCheck() {
-    List index = playBoardValues;
-    bool winnerFound = false;
+    final List index = playBoardValues;
     if (!winnerFound) {
       if (index[0] == "o" && index[1] == "o" && index[2] == "o") {
         winnerFound = true;
@@ -75,6 +84,18 @@ class PlayBoardController extends GetxController {
       } else {
         winner?.value = "";
       }
+    }
+  }
+
+  int countMove = 1;
+  void drawChecker() {
+    countMove += 1;
+    if (countMove == 9 && winnerFound == false) {
+      drawFound = true;
+      countMove = 1;
+    } else if (winnerFound) {
+      drawFound = false;
+      countMove = 1;
     }
   }
 }
