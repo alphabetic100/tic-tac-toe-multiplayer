@@ -24,7 +24,7 @@ class PersonalDashboard extends StatelessWidget {
           drawVerticalLine: true,
           getDrawingVerticalLine: (value) {
             return const FlLine(
-              color: MyColors.slateBlue,
+              color: Colors.white,
               strokeWidth: 1,
             );
           },
@@ -43,7 +43,7 @@ class PersonalDashboard extends StatelessWidget {
             //   right: BorderSide.none,
             // ),
             ),
-        backgroundColor: MyColors.slateBlue.withOpacity(0.5),
+        // backgroundColor: MyColors.slateBlue.withOpacity(0.5),
         lineBarsData: [
           LineChartBarData(
               isCurved: true,
@@ -53,11 +53,12 @@ class PersonalDashboard extends StatelessWidget {
                 const FlSpot(1, 1),
                 const FlSpot(2, 2),
                 const FlSpot(3, 3),
-                const FlSpot(4, 4),
+                const FlSpot(5, 4),
+                const FlSpot(7, 3),
               ],
               belowBarData: BarAreaData(
                 show: true,
-                color: MyColors.vividBlue.withOpacity(0.5),
+                color: MyColors.slateBlue.withOpacity(0.7),
               )),
         ],
         titlesData: FlTitlesData(

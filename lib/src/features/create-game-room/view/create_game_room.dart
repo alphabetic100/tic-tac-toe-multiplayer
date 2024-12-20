@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/view/online-room/play_offline_game_room.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/view/offline-room/play_offline_game_room.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/view/online-room/play_online_game_view.dart';
 
 class CreateGameRoom extends StatelessWidget {
   const CreateGameRoom({super.key, required this.playOnlineMode});
@@ -9,12 +10,7 @@ class CreateGameRoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (playOnlineMode) {
-      return Scaffold(
-        appBar: AppBar(),
-        body: const Center(
-          child: Text("this page is under developement"),
-        ),
-      );
+      return PlayOnlineGameView();
     } else {
       return PlayOfflineGameRoom();
     }

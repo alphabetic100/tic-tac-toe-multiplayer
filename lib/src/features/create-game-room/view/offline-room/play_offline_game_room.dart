@@ -4,7 +4,6 @@ import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/custom_but
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/error_alert_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/controller/play_board_controller.dart';
-
 import '../../../../core/customs/screen_size.dart';
 import '../../../../core/customs/widgets/custom_o_widget.dart';
 import '../../../../core/customs/widgets/custom_x_widget.dart';
@@ -31,7 +30,9 @@ class PlayOfflineGameRoom extends StatelessWidget {
               TopBar(),
               const HorizontalSpace(height: 10),
               // playBoard view
-              PlayBoard(),
+              PlayBoard(
+                onlineMode: false,
+              ),
               const HorizontalSpace(height: 30),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -14,6 +14,20 @@ class PlayBoardController extends GetxController {
   bool winnerFound = false;
   bool drawFound = false;
 
+  @override
+  void onInit() {
+    super.onInit();
+    currentMove.value = false;
+    xWins.value = false;
+    oWins.value = false;
+    xWinTime.value = 0;
+    oWinTime.value = 0;
+    drawTime.value = 0;
+    winner!.value = "";
+    winnerFound = false;
+    drawFound = false;
+  }
+
   closeRoom() {
     clearBoard();
     oWinTime.value = 0;
