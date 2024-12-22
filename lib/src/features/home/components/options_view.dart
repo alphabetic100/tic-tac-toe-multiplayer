@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custome_size_box.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/colors/my_colors.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text_style.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/home/components/offline_mode_dialog.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/home/components/online_mode_dialog.dart';
 
 class OptionsView extends StatelessWidget {
   const OptionsView({super.key});
@@ -32,21 +32,21 @@ class OptionsView extends StatelessWidget {
                   boxShadow: const [
                     BoxShadow(
                       color: MyColors.lightGrey,
-                      spreadRadius: 5,
-                      blurRadius: 3,
+                      spreadRadius: 2,
+                      blurRadius: 5,
                     )
                   ],
-                  border: Border.all(color: MyColors.turquoise),
+                  border: Border.all(color: MyColors.grayishBlue),
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: MyColors.vividBlue,
+                      color: MyColors.grayishBlue,
                       borderRadius: BorderRadius.circular(18)),
                   child: Center(
                     child: Icon(
                       CupertinoIcons.wifi_slash,
                       size: ScreenSize.height * 0.055,
-                      color: MyColors.lightGrey,
+                      color: MyColors.darkGrey,
                     ),
                   ),
                 ),
@@ -64,8 +64,8 @@ class OptionsView extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                context.pushNamed("createGameRoom",
-                    queryParameters: {"playOnlineMode": "true"});
+                showDialog(
+                    context: context, builder: (_) => const OnlineModeDialog());
               },
               child: Container(
                 height: ScreenSize.height * 0.15,
@@ -75,20 +75,20 @@ class OptionsView extends StatelessWidget {
                   boxShadow: const [
                     BoxShadow(
                         color: MyColors.lightGrey,
-                        spreadRadius: 5,
-                        blurRadius: 3)
+                        spreadRadius: 2,
+                        blurRadius: 5)
                   ],
-                  border: Border.all(color: MyColors.turquoise),
+                  border: Border.all(color: MyColors.grayishBlue),
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: MyColors.vividBlue,
+                      color: MyColors.grayishBlue,
                       borderRadius: BorderRadius.circular(18)),
                   child: Center(
                     child: Icon(
                       CupertinoIcons.wifi,
                       size: ScreenSize.height * 0.055,
-                      color: MyColors.lightGrey,
+                      color: MyColors.darkGrey,
                     ),
                   ),
                 ),

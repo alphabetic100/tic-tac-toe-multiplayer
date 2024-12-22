@@ -48,6 +48,7 @@ class HomeScreen extends StatelessWidget {
       drawer: const ProfileDrawer(),
       backgroundColor: MyColors.white,
       body: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
         child: SizedBox(
           height: ScreenSize.height - kToolbarHeight * (1.5),
           width: ScreenSize.width,
@@ -93,7 +94,15 @@ class HomeScreen extends StatelessWidget {
                           // game mode
                           const OptionsView(),
                           const HorizontalSpace(height: 20),
-                          CustomButton(
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: ScreenSize.width * 0.1),
+                            child: CustomButton(
+                              onTap: () {
+                                // localStorageService.deleteToken();
+                                context.pushNamed("globalRank");
+                              },
+                              color: MyColors.vividBlue,
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -108,10 +117,8 @@ class HomeScreen extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              onTap: () {
-                                // localStorageService.deleteToken();
-                                context.pushNamed("globalRank");
-                              })
+                            ),
+                          )
                         ],
                       ),
                     ),

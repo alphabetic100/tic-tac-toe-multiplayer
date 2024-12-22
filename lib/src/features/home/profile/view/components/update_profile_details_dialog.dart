@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/custom_button.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/custom_text_field.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/screen_size.dart';
 import 'package:tic_tac_toe_multiplayer/src/core/customs/widgets/custome_size_box.dart';
@@ -45,43 +47,34 @@ class UpdateProfileDetailsDialog extends StatelessWidget {
         ),
       ),
       actions: [
-        TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
+        CustomButton(
+            onTap: () async {
+              dataController.isLoading.value = true;
+              if (changedName.isNotEmpty) {
+                await profileService.updateUserData(changedName);
+                Navigator.of(context).pop();
+                Future.delayed(const Duration(milliseconds: 3000));
+                await profileService.fetchProfileData();
+                dataController.isLoading.value = false;
+              } else {
+                dataController.isLoading.value = false;
+              }
             },
-            child: const Center(
-              child: Text(
-                "cencel",
-                style: TextStyle(
-                    color: MyColors.vividBlue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-              ),
+            child: const Text(
+              "update",
+              style: CustomTextStyle.buttonTextstyle,
             )),
-        TextButton(
-          onPressed: () async {
-            dataController.isLoading.value = true;
-            if (changedName.isNotEmpty) {
-              await profileService.updateUserData(changedName);
-              Navigator.of(context).pop();
-
-              await Future.delayed(const Duration(milliseconds: 3000));
-              await profileService.fetchProfileData();
-              dataController.isLoading.value = false;
-            } else {
-              dataController.isLoading.value = false;
-            }
+        const HorizontalSpace(height: 10),
+        CustomButton(
+          onTap: () {
+            context.pop();
           },
-          child: const Center(
-            child: Text(
-              "ok",
-              style: TextStyle(
-                  color: MyColors.vividBlue,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
-            ),
+          color: Colors.red.withOpacity(0.5),
+          child: const Text(
+            "cencel",
+            style: CustomTextStyle.buttonTextstyle,
           ),
-        )
+        ),
       ],
     );
   }
