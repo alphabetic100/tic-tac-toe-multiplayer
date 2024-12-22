@@ -10,22 +10,19 @@ onlineModeFunc(BuildContext context, int index) {
       Get.put(PlayBoardController());
   final TimerController timerController = Get.put(TimerController());
   if (playBoardController.playBoardValues[index].isEmpty) {
+    playBoardController.drawChecker();
     if (playBoardController.currentMove.value) {
-      // Start my timer and stop opponent timer
-      timerController.myTimerStart();
-      playBoardController.playBoardValues[index] = "x";
-    } else {
-      // Start opponent timer and stop my timer
-      timerController.opponentTimerStart();
+      timerController.startOpponentTimer();
       playBoardController.playBoardValues[index] = "o";
+    } else {
+      timerController.startMyTimer();
+
+      playBoardController.playBoardValues[index] = "x";
     }
-    // playBoardController.currentMove.value
-    //     ? playBoardController.playBoardValues[index] = "x"
-    //     : playBoardController.playBoardValues[index] = "o";
     playBoardController.changeMove();
   }
   playBoardController.winCheck();
-  playBoardController.drawChecker();
+
   if (playBoardController.winner!.value == "x") {
     playBoardController.xWinTime.value += 1;
     {

@@ -15,8 +15,7 @@ class AuthServices {
       Get.put(LoginLoadingController());
   final LoginSuccessChecker loginSuccessChecker =
       Get.put(LoginSuccessChecker());
-  Future<void> signUp(
-    {
+  Future<void> signUp({
     required String email,
     required String password,
     required String imagePath,
@@ -30,6 +29,10 @@ class AuthServices {
       );
 
       if (userCredential.user != null) {
+        String userUid = userCredential.user!.uid;
+        storageService.saveToken(userUid);
+        String? userEmail = userCredential.user!.email;
+        signUpService.getAuthData(userUid, userEmail);
         await signUpService.createUserData();
       }
     } on FirebaseAuthException catch (e) {

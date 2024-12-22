@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyColors.white,
+        surfaceTintColor: MyColors.white,
         actions: [
           Container(
             decoration: BoxDecoration(

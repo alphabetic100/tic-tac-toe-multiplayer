@@ -8,13 +8,14 @@ offlineModeFunc(BuildContext context, int index) {
   final PlayBoardController playBoardController =
       Get.put(PlayBoardController());
   if (playBoardController.playBoardValues[index].isEmpty) {
+    playBoardController.drawChecker();
     playBoardController.currentMove.value
-        ? playBoardController.playBoardValues[index] = "x"
-        : playBoardController.playBoardValues[index] = "o";
+        ? playBoardController.playBoardValues[index] = "o"
+        : playBoardController.playBoardValues[index] = "x";
     playBoardController.changeMove();
   }
   playBoardController.winCheck();
-  playBoardController.drawChecker();
+
   if (playBoardController.winner!.value == "x") {
     playBoardController.xWinTime.value += 1;
     {

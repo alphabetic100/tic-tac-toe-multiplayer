@@ -8,7 +8,8 @@ import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text
 import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/controller/play_board_controller.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/room-components/play_board.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/view/online-room/components/online_board_app_bar.dart';
-import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/view/online-room/components/player_profile_view.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/view/online-room/components/opponent_view.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/view/online-room/components/my_view.dart';
 
 class PlayOnlineGameView extends StatelessWidget {
   PlayOnlineGameView({super.key});
@@ -26,10 +27,7 @@ class PlayOnlineGameView extends StatelessWidget {
           child: Column(
             children: [
               // opponent player
-              PlayerProfileView(
-                mainAxisAlignment: MainAxisAlignment.end,
-                myTurn: false,
-              ),
+              OpponentView(),
               // play board
               Container(
                 color: Colors.amberAccent,
@@ -38,10 +36,8 @@ class PlayOnlineGameView extends StatelessWidget {
                 ),
               ),
               //ui player
-              PlayerProfileView(
-                mainAxisAlignment: MainAxisAlignment.start,
-                myTurn: playBoardController.currentMove.value,
-              ),
+
+             MyView(),
               //Bottom part of this room
               Expanded(
                 child: Container(

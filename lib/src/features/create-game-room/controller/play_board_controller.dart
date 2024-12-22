@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
+import 'package:tic_tac_toe_multiplayer/src/features/create-game-room/view/online-room/components/controller/timer_controller.dart';
 
 class PlayBoardController extends GetxController {
+  final TimerController timerController = Get.put(TimerController());
   RxBool currentMove = false.obs;
   RxBool xWins = false.obs;
   RxBool oWins = false.obs;
@@ -44,6 +46,7 @@ class PlayBoardController extends GetxController {
     winnerFound = false;
     drawFound = false;
     countMove = 1;
+    timerController.onClose();
   }
 
   clearCurrentWinner() {
