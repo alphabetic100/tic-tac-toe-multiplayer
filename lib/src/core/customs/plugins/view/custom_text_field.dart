@@ -8,18 +8,22 @@ class CustomTextField extends StatelessWidget {
     required this.labelText,
     required this.onChanged,
     required this.onSubmitted,
+    required this.textInputType,
     this.enableObsecureText = false,
   });
   final String labelText;
+
   final ValueChanged<String> onChanged;
   final ValueChanged<String> onSubmitted;
   final bool enableObsecureText;
+  final TextInputType textInputType;
   final CustomTextFieldController textFieldController =
       Get.put(CustomTextFieldController());
   @override
   Widget build(BuildContext context) {
     if (enableObsecureText) {
       return Obx(() => TextField(
+            keyboardType: textInputType,
             onChanged: onChanged,
             onSubmitted: onSubmitted,
             obscureText: textFieldController.obsecureText.value,

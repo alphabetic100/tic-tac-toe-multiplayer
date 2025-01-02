@@ -36,6 +36,8 @@ class UpdateProfileDetailsDialog extends StatelessWidget {
             ),
             const HorizontalSpace(height: 10),
             CustomTextField(
+                textInputType: TextInputType.name,
+                
                 labelText: "Change user name",
                 onChanged: (value) {
                   changedName = value;

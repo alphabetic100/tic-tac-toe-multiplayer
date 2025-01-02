@@ -15,6 +15,8 @@ class AuthServices {
       Get.put(LoginLoadingController());
   final LoginSuccessChecker loginSuccessChecker =
       Get.put(LoginSuccessChecker());
+
+  //Sign up
   Future<void> signUp({
     required String email,
     required String password,

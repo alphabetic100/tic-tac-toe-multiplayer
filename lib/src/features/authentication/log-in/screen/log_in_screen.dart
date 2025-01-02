@@ -48,6 +48,7 @@ class LogInScreen extends StatelessWidget {
                   children: [
                     HorizontalSpace(height: ScreenSize.height * 0.12),
                     CustomTextField(
+                      textInputType: TextInputType.emailAddress,
                       labelText: "enter your email",
                       onChanged: (value) {
                         loginEmail = value;
@@ -58,6 +59,7 @@ class LogInScreen extends StatelessWidget {
                     ),
                     const HorizontalSpace(height: 20),
                     CustomTextField(
+                      textInputType: TextInputType.visiblePassword,
                       labelText: "enter your password",
                       enableObsecureText: true,
                       onChanged: (value) {

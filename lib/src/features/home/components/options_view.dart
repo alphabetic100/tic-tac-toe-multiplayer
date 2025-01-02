@@ -65,7 +65,7 @@ class OptionsView extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 showDialog(
-                    context: context, builder: (_) => const OnlineModeDialog());
+                    context: context, builder: (_) =>  OnlineModeDialog());
               },
               child: Container(
                 height: ScreenSize.height * 0.15,

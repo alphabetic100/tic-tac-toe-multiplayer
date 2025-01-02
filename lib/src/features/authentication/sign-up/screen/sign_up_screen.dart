@@ -99,6 +99,7 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     ),
                     CustomTextField(
+                      textInputType: TextInputType.name,
                       labelText: "enter yor full name",
                       onChanged: (value) {
                         fullName = value;
@@ -109,6 +110,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     const HorizontalSpace(height: 20),
                     CustomTextField(
+                      textInputType: TextInputType.emailAddress,
                       labelText: "enter your email",
                       onChanged: (value) {
                         email = value;
@@ -119,6 +121,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     const HorizontalSpace(height: 20),
                     CustomTextField(
+                      textInputType: TextInputType.visiblePassword,
                       labelText: "enter your password",
                       enableObsecureText: true,
                       onChanged: (value) {
@@ -134,7 +137,6 @@ class SignUpScreen extends StatelessWidget {
                           if (fullName.isNotEmpty &&
                               isEmailPasswordValid(email, password)) {
                             services.signUp(
-                        
                               email: email,
                               password: password,
                               imagePath: "",
