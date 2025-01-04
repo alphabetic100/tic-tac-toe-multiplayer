@@ -6,10 +6,11 @@ class MatchmakingService {
   final matchmakingcollection =
       FirebaseFirestore.instance.collection("matchMaking");
   String currentRoomId = "";
+
   //Create game rooom
   Future<bool> createGameRoom() async {
     try {
-      var userId = await storageService.getToken();
+      String? userId = await storageService.getToken();
       DocumentReference ref = await matchmakingcollection.add({
         "createdPlayerId": userId,
         "isEmpty": false,
@@ -28,30 +29,31 @@ class MatchmakingService {
 
   // join existed room
   Future<bool> joinExistedRoom() async {
-    try {
-      var userId = await storageService.getToken();
+  try {
+    var userId = await storageService.getToken();
 
-      final querySnapshot = await matchmakingcollection.get();
-      for (var doc in querySnapshot.docs) {
-        final data = doc.data();
-        if (data["isEmpty"] == false) {
-          await matchmakingcollection.doc(doc.id).update({
-            'isEmpty': true,
-            'joinedPlayerId': userId,
-          });
-          currentRoomId = doc.id;
-          return true;
-        }
+    final querySnapshot = await matchmakingcollection.get();
+    for (var doc in querySnapshot.docs) {
+      final data = doc.data();
+      if (data["isEmpty"] == false && data["createdPlayerId"] != userId) {
+        await matchmakingcollection.doc(doc.id).update({
+          'isEmpty': true,
+          'joinedPlayerId': userId,
+        });
+        currentRoomId = doc.id;
+        return true;
       }
-      return false;
-    } catch (e) {
-      throw Exception("something went wrong, error: $e");
     }
+    return false;
+  } catch (e) {
+    throw Exception("something went wrong, error: $e");
   }
+}
+
 
   // Delete Created Room
   Future<void> deleteCreatedRoom() async {
-    final docRef = matchmakingcollection.doc(currentRoomId);
+    final DocumentReference docRef = matchmakingcollection.doc(currentRoomId);
     docRef.delete();
   }
 

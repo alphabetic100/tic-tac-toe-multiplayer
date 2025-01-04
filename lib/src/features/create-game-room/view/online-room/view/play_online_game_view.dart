@@ -22,7 +22,7 @@ class PlayOnlineGameView extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (bool didPop, Object? result) {
         showDialog(
           context: context,
           builder: (_) {

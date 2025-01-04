@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (bool didPop, Object? result) {
         showDialog(
             context: context,
             builder: (_) => ErrorAlertDialog(
@@ -120,7 +120,6 @@ class HomeScreen extends StatelessWidget {
                                   horizontal: ScreenSize.width * 0.1),
                               child: CustomButton(
                                 onTap: () {
-                                  
                                   context.pushNamed("globalRank");
                                 },
                                 color: MyColors.vividBlue,
