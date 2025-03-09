@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -14,10 +16,13 @@ import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/botom_view
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/func/email_pass_velidation_checker.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/components/login_error_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/components/login_success_dialog.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/repository/facebook_auth_service.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/repository/google_auth_service.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/controller/login_loading_controller.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/controller/login_success_checker.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/values/login_values.dart';
-import 'package:tic_tac_toe_multiplayer/src/services/auth-services/auth_services.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/repository/auth_services.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/repository/sign_up_service.dart';
 
 class LogInScreen extends StatelessWidget {
   LogInScreen({super.key});
@@ -26,6 +31,7 @@ class LogInScreen extends StatelessWidget {
   final LoginSuccessChecker loginSuccessChecker =
       Get.put(LoginSuccessChecker());
   final AuthServices authServices = AuthServices();
+  final SignUpService signUpService = SignUpService();
 
   @override
   Widget build(BuildContext context) {
@@ -109,12 +115,14 @@ class LogInScreen extends StatelessWidget {
                           }
                         } else {
                           showDialog(
-                              context: context,
-                              builder: (_) {
-                                return const LoginErrorDialog(
-                                    errorMassage:
-                                        "Email or password is not in valid formate");
-                              });
+                            context: context,
+                            builder: (_) {
+                              return const LoginErrorDialog(
+                                errorMassage:
+                                    "Email or password is not in valid formate",
+                              );
+                            },
+                          );
                         }
                       },
                       child: Obx(
@@ -132,8 +140,31 @@ class LogInScreen extends StatelessWidget {
                     ),
                     const HorizontalSpace(height: 20),
                     LoginMathodesView(
-                      gmailLancher: () {},
-                      facebookLancher: () {},
+                      gmailLancher: () async {
+                        // Get.dialog(const CustomLoadingIndicator());
+                        final response = await GoogleAuthService.googleLogIn();
+                        log("Sign in result: $response");
+
+                        if (response.user != null) {
+                          signUpService.getAuthData(
+                              response.user!.uid, response.user?.email);
+                          await signUpService.createUserData();
+                          showDialog(
+                            context: context,
+                            builder: (_) => const LoginSuccessDialog(
+                              successMassage: "Successfully Loged In",
+                            ),
+                          );
+                          Future.delayed(const Duration(seconds: 1), () {
+                            context.goNamed("home");
+                          });
+                        }
+                      },
+                      facebookLancher: () async {
+                        final response =
+                            await FacebookAuthService.facebookAuth();
+                        log(response);
+                      },
                     )
                   ],
                 ),

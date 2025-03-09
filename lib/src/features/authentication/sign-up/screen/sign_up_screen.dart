@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -15,11 +16,14 @@ import 'package:tic_tac_toe_multiplayer/src/core/utils/themes/styles/custom_text
 import 'package:tic_tac_toe_multiplayer/src/core/customs/plugins/view/botom_view.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/func/email_pass_velidation_checker.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/components/login_error_dialog.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/repository/facebook_auth_service.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/repository/google_auth_service.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/components/image_picker_dialog.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/controller/loading_indicator_controller.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/service/local-service/local_image_picker.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/values/sign_in_values.dart';
-import 'package:tic_tac_toe_multiplayer/src/services/auth-services/auth_services.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/repository/auth_services.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/repository/sign_up_service.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
@@ -27,6 +31,7 @@ class SignUpScreen extends StatelessWidget {
   final LoadingIndicatorController indicatorController =
       Get.put(LoadingIndicatorController());
   final LocalImagePicker imagePicker = Get.put(LocalImagePicker());
+  final SignUpService signUpService = SignUpService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +67,7 @@ class SignUpScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: Obx(() {
                                 return CircleAvatar(
-                                    radius: 5003,
+                                    radius: 100,
                                     backgroundColor: MyColors.lightGrey,
                                     backgroundImage: imagePicker
                                             .pickedImagePath.value.isNotEmpty
@@ -163,8 +168,19 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     const HorizontalSpace(height: 20),
                     LoginMathodesView(
-                      gmailLancher: () {},
-                      facebookLancher: () {},
+                      gmailLancher: () async {
+                        log("Tapped");
+                        final response = await GoogleAuthService.googleLogIn();
+
+                        signUpService.getAuthData(
+                            response.user!.uid, response.user?.email);
+                        await signUpService.createUserData();
+                      },
+                      facebookLancher: () async {
+                        final response =
+                            await FacebookAuthService.facebookAuth();
+                        log(response);
+                      },
                     )
                   ],
                 ),

@@ -2,7 +2,7 @@
 // import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tic_tac_toe_multiplayer/src/services/auth-services/sign_up_service.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/repository/sign_up_service.dart';
 
 class LocalImagePicker extends GetxController {
   final SignUpService signUpService = SignUpService();

@@ -4,7 +4,7 @@ import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/contr
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/log-in/controller/login_success_checker.dart';
 import 'package:tic_tac_toe_multiplayer/src/features/authentication/sign-up/controller/loading_indicator_controller.dart';
 import 'package:tic_tac_toe_multiplayer/src/services/local/local_storage_service.dart';
-import 'package:tic_tac_toe_multiplayer/src/services/auth-services/sign_up_service.dart';
+import 'package:tic_tac_toe_multiplayer/src/services/auth-services/repository/sign_up_service.dart';
 
 class AuthServices {
   final LocalStorageService storageService = LocalStorageService();

@@ -38,5 +38,5 @@ class SignUpService {
     _userUid = userUid;
     _userEmail = email ?? "";
    
-  }
+  } 
 }
